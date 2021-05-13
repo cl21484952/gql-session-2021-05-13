@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+
+  template-backend:
+    container_name: template-backend
+    image: "node:12"
+    environment:
+      - "DEVELOPMENT=1"
+    volumes:
+      - .:/workdir
+    working_dir: /workdir
+    networks:
+      - template-bridge
+    ports:
+      - 21001:4000
+    command: ["npm", "run", "start"]
+
+  template-mysql:
+    container_name: template-mysql
+    image: "mysql:8"
+    environment:
+      - "MYSQL_ROOT_PASSWORD=w4PamL5ekSJaL9uY"
+      - "MYSQL_DATABASE=templatedb"
+      - "MYSQL_USER=dev"
+      - "MYSQL_PASSWORD=somedevdude@123"
+    volumes:
+      - "$HOME/persistent/template-mysql8:/var/lib/mysql"
+    ports:
+      - 21002:3306
+    command: ["mysqld", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    networks:
+      - template-bridge
+
+networks:
+  template-bridge: {}

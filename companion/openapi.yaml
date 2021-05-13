@@ -1,0 +1,227 @@
+openapi: "3.0.3"
+info:
+  description: "Example comparision to Graphql"
+  version: "1.0.0"
+  title: "Traditional RESTFUL API"
+  contact:
+    email: "chrispongleemail@gmail.com"
+  license:
+    name: "Creative Common 4.0"
+    url: "https://creativecommons.org/licenses/by/4.0/"
+tags:
+  - name: "author"
+    description: "Endpoint related to author"
+  - name: "post"
+    description: "Endpoint related to post"
+paths:
+  "/author/{id}":
+    get:
+      tags:
+        - "author"
+      summary: "get a specific author"
+      description: ""
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "id of the author"
+          required: true
+          schema:
+            type: "integer"
+      responses:
+        "200":
+          description: "ok"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Author"
+        "404":
+          description: "No such resource"
+    put:
+      tags:
+        - "author"
+      summary: "get a specific author"
+      description: ""
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "id of the author"
+          required: true
+          schema:
+            type: "integer"
+      responses:
+        "200":
+          description: "ok"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Author"
+        "404":
+          description: "No such resource"
+  "/author":
+    post:
+      tags:
+        - "author"
+      summary: "Add a new author"
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Author"
+      responses:
+        "200":
+          description: "ok"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Author"
+        "404":
+          description: "No such resource"
+    get:
+      tags:
+        - "author"
+      summary: "get list of author"
+      description: ""
+      parameters:
+        - $ref: "#/components/parameters/Offset"
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        "200":
+          description: "ok"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Author"
+        "404":
+          description: "No such resource"
+  "/post/{id}":
+    get:
+      tags:
+        - "post"
+      summary: "get a specific post"
+      description: ""
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "id of the post"
+          required: true
+          schema:
+            type: "integer"
+      responses:
+        "200":
+          description: "ok"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Post"
+        "404":
+          description: "No such resource"
+    put:
+      tags:
+        - "post"
+      summary: "get a specific post"
+      description: ""
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "id of the post"
+          required: true
+          schema:
+            type: "integer"
+      responses:
+        "200":
+          description: "ok"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Post"
+        "404":
+          description: "No such resource"
+  "/post":
+    post:
+      tags:
+        - "post"
+      summary: "Add a new post"
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Post"
+      responses:
+        "200":
+          description: "ok"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Post"
+        "404":
+          description: "No such resource"
+    get:
+      tags:
+        - "post"
+      summary: "get list of post"
+      description: ""
+      parameters:
+        - $ref: "#/components/parameters/Offset"
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        "200":
+          description: "ok"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Post"
+        "404":
+          description: "No such resource"
+
+components:
+  parameters:
+    Offset:
+      name: "offset"
+      in: "query"
+      schema:
+        type: "integer"
+        minimum: 0
+    Limit:
+      name: "limit"
+      in: "query"
+      schema:
+        type: "integer"
+        minimum: 1
+  schemas:
+    Author:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          example: 1
+        firstname:
+          type: "string"
+          example: "Amelia"
+        lastname:
+          type: "string"
+          example: "Watson"
+      required:
+        - "id"
+        - "firstname"
+        - "lastname" 
+    Post:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          example: 1
+        authorId:
+          type: "integer"
+          example: 1
+        title:
+          type: "string"
+          example: "Amelia"
+        vote:
+          type: "integer"
+      required:
+        - "id"
+        - "authorId"
+        - "title"
+        - "vote"

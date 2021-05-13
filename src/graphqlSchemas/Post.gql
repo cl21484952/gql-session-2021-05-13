@@ -1,0 +1,17 @@
+type Post {
+  id: ID!
+  authorId: ID!
+  title: String!
+  votes: Int!
+  author: Author!
+}
+
+type Mutation {
+  postPost(authorId: ID!, title: String!): Post
+  putPost(id: ID!, title: String!): Post
+}
+
+type Query {
+  post(id: ID!): Post
+  listPost(offset: Int = 0, limit: Int = 25): [Post]!
+}

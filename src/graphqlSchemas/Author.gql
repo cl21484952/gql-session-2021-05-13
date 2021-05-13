@@ -1,0 +1,20 @@
+"""
+About the author
+"""
+type Author {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  posts(offset: Int = 0, limit: Int = 25): [Post!]!
+  postCount: Int!
+}
+
+type Mutation {
+  postAuthor(firstName: String!, lastName: String!): Author
+  putAuthor(id: ID!, firstName: String!, lastName: String!): Author
+}
+
+type Query {
+  author(id: ID!): Author
+  listAuthor(offset: Int = 0, limit: Int = 25): [Author]!
+}
