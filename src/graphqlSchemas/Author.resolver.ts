@@ -57,10 +57,11 @@ const rootMutation: IResolvers<any, IGQLContext> = {
 }
 
 const rootQuery: IResolvers<any, IGQLContext> = {
-  author: async (_src, { id }: { id: number | string }, { db }, _info) => {
+  author: async (_src, { id }: { id: string }, { db }, _info) => {
+    console.log({id})
     const authorObj =
       db.authors.find((element) => {
-        return element.id === id
+        return element.id === parseInt(id)
       }) || null
     return authorObj
   },

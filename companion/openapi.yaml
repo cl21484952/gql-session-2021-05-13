@@ -91,7 +91,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Author"
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Author"
         "404":
           description: "No such resource"
   "/post/{id}":
@@ -165,13 +167,20 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Offset"
         - $ref: "#/components/parameters/Limit"
+        - name: "authorId"
+          in: "query"
+          schema:
+            type: "integer"
+            minimum: 1
       responses:
         "200":
           description: "ok"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Post"
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Post"
         "404":
           description: "No such resource"
 

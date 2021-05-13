@@ -53,7 +53,7 @@ const results = [
 
 ### Graphql
 
-Will need to call multiple endpoint
+Will need just 1 endpoint
 
 ```typescript
 import axios from 'axios'

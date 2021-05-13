@@ -26,10 +26,10 @@ const rootQuery: IResolvers<any, IGQLContext> = {
 }
 
 const rootMutation: IResolvers<any, IGQLContext> = {
-  postPost: async (_src, { authorId, title }: { authorId: number; title: string }, { db }, _info) => {
+  postPost: async (_src, { authorId, title }: { authorId: string; title: string }, { db }, _info) => {
     const newPost: IPost = {
-      id: Math.random() * (Number.MAX_SAFE_INTEGER - 1) + 1,
-      authorId: authorId,
+      id: Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 1) + 1),
+      authorId: parseInt(authorId),
       title: title,
       votes: 0,
     }
@@ -37,9 +37,9 @@ const rootMutation: IResolvers<any, IGQLContext> = {
     return newPost
   },
 
-  putPost: async (_src, { id, title }: { id: number | string; title: string }, { db }, _info) => {
+  putPost: async (_src, { id, title }: { id: string; title: string }, { db }, _info) => {
     const postOne = db.posts.find((element) => {
-      return element.id === id
+      return element.id === parseInt(id)
     })
 
     if (postOne) {
